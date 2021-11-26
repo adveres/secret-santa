@@ -45,7 +45,7 @@ def send_email_from_pairs(pairs, sender_email):
         for my_pair in sorted(pairs, key=lambda x: x[0].household.address_1):
             giver, receiver = my_pair
             logging.info(f"{giver.first} {giver.last} -> {receiver}. Emailing <{giver.email}>")
-            message = email.make_mime_message(giver, receiver, sender_email)
+            message = email.make_mime_message(sender_email, giver, receiver)
             server.sendmail(sender_email, giver.email, message.as_string())
 
 

@@ -18,11 +18,11 @@
     "default": {
         "prettytable": {
             "hashes": [
-                "sha256:5dc7fcaca227f48deacd86958ae9d7b8c31a186fcb354bbb066763f20adf3eb9",
-                "sha256:e37acd91976fe6119172771520e58d1742c8479703489321dc1d9c85e7259922"
+                "sha256:18e56447f636b447096977d468849c1e2d3cfa0af8e7b5acfcf83a64790c0aca",
+                "sha256:2492f29e8686bdbcce815a568bff74cb71cbb704747c3abb9c9c6cfe25f985a2"
             ],
             "index": "pypi",
-            "version": "==2.0.0"
+            "version": "==2.4.0"
         },
         "wcwidth": {
             "hashes": [

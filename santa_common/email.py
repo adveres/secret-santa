@@ -1,14 +1,18 @@
 """
 Helps create email messages
 """
+import datetime
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+
 from .people import Person
+
+YEAR = datetime.datetime.now().year
 
 
 def make_mime_message(sender_email: str, giver: Person, receiver: Person) -> MIMEMultipart:
     message = MIMEMultipart("alternative")
-    message["Subject"] = f"🎅 Pst {giver.first}, your 2020 Secret Santa pick is here! 🎅"
+    message["Subject"] = f"🎅 Pst {giver.first}, your {YEAR} Secret Santa pick is here! 🎅"
     message["From"] = sender_email
     message["To"] = giver.email
 
@@ -21,6 +25,7 @@ def make_mime_message(sender_email: str, giver: Person, receiver: Person) -> MIM
     Hi, {giver.first}!
 
     You've been assigned {receiver.first} as your secret-Santa recipient.
+    We're going to bring the gifts in-person, but should you need to mail them...
     Their full address is: 
 
     {receiver.first} ${receiver.last}
@@ -30,20 +35,22 @@ def make_mime_message(sender_email: str, giver: Person, receiver: Person) -> MIM
     Remember the price limit is $30!
     We can start a big email thread with peoples' wish lists separately.
     This is secret, don't spill who was assigned to you! 🙊
-    Double check shipping information before you send your gift.
+    If shipping, double check shipping information before you send your gift.
 
     Merry Christmas!
     """
     if receiver.household.notes is not None:
         text += "\n\n" + receiver.household.notes
 
+    # ----------------- HTML -----------------
     html = f"""\
     <html>
       <body>
         <p>Hi, <b>{giver.first}</b>!<br><br>
         <h2>🎁 Who? 🎁</h2>
-        You've been assigned <b>{receiver.first}</b> ({receiver.email}) as your Secret Santa recipient. 
-        Their full address is: <br>
+        You've been assigned <b>{receiver.first}</b> ({receiver.email}) as your Secret Santa recipient. <br>
+        We're going to bring the gifts in-person. Should you need to mail them, their full address is: <br>
+        
         <blockquote>
         <b>{receiver.first} {receiver.last}</b><br>
         <b>{receiver.household.address_1}</b><br>
@@ -54,7 +61,7 @@ def make_mime_message(sender_email: str, giver: Person, receiver: Person) -> MIM
         <li>The price limit is $30</li>
         <li>We can start a big email thread with peoples' wish lists separately</li>
         <li>This is secret, don't spill who was assigned to you! 🙊</li>
-        <li>Double check shipping information before you send your gift.</li>
+        <li>If shipping, double check shipping information before you send your gift.</li>
     """
     if receiver.household.notes is not None:
         html += "<li><b><u>Special notes for this address:</u></b> " + receiver.household.notes + "</li>"
