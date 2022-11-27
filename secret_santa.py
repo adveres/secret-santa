@@ -61,6 +61,8 @@ def main(send_emails, sender_email):
     if send_emails:
         logging.debug("Sending emails as <%s>", sender_email)
         send_email_from_pairs(pairs, sender_email)
+    else:
+        logging.info("No emails were actually sent!")
 
     return 0
 

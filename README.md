@@ -1,9 +1,38 @@
 # secret-santa
-Lets you do Secret Santa assignments by providing the program with `people` and `households`. Participants will be 
-emailed their randomly assigned giftee. Participants cannot be assigned someone from their own household.
 
+Lets you do Secret Santa assignments by providing the program with `people` and
+`households`.  Participants will be  emailed their randomly assigned giftee.
+Participants cannot be assigned someone from their own household.
+
+## Prerequisites
+
+* [python3.10+](https://www.python.org/downloads/)
+* [poetry](https://python-poetry.org/)
+
+### Ubuntu
+
+```bash
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt update
+sudo apt install python3.10
+curl -sSL https://install.python-poetry.org | python3.10 -
+```
+
+-----
+
+## Bootstrap Repository
+
+```bash
+git clone git@gitlab.com:adveres/leetcode.git
+cd leetcode
+poetry install
+poetry shell
+```
+
+-----
 
 ## Usage
+
 ```bash
 python3 secret_santa.py --help
 ```
@@ -14,7 +43,11 @@ python3 secret_santa.py --help
     * *By default it's just a dry-run of the pairings instead of actually sending emails.*
 4. Input your email password, when prompted, if `--send-emails` param was given
 
+-----
+-----
+
 ## Points of Improvement
+
 * Only works with gmail (could add SMTP param)
 * Have to handcraft JSON files with people + addresses. Yuck. (read from gDrive? gContacts?)
 * I'd like to preview the emails without having to send them (write HTML file)
