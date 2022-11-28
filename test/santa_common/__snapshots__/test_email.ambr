@@ -1,0 +1,47 @@
+# name: test_make_email_content
+  dict({
+    'html': '''
+          <html>
+            <body>
+              <p>Hi, <b>Simple</b>!<br><br>
+              <h2>🎁 Who? 🎁</h2>
+              You've been assigned <b>Parent</b> (fakeEmail@fakeEmailsRus.com) as your Secret Santa recipient. <br>
+              We're going to bring the gifts in-person. Should you need to mail them, their full address is: <br>
+              
+              <blockquote>
+              <b>Parent Person</b><br>
+              <b>1111 Robot Lane</b><br>
+              <b>Epcot, FL 99999</b><br>
+              </blockquote>
+              <h2>🎁 Details 🎁</h2>
+              <ul>
+              <li>The price limit is <b>$30</b></li>
+              <li>We can start a big email thread with peoples' wish lists separately</li>
+              <li>This is secret, don't spill who was assigned to you! 🙊</li>
+              <li>If shipping, double check shipping information before you send your gift.</li>
+          <li><b><u>Special notes for this address:</u></b> Some Amazon companies won't ship to a PO box, so the gifter may need to use the Amazon store that's downtown for pickups.</li></ul><br>🎄 Merry Christmas! 🎄</p></body></html>
+    ''',
+    'plain': '''
+      
+          Hi, Simple!
+      
+          You've been assigned Parent as your secret-Santa recipient.
+          We're going to bring the gifts in-person, but should you need to mail them...
+          Their full address is: 
+      
+          Parent $Person
+          1111 Robot Lane
+          Epcot, FL 99999
+          
+          Remember the price limit is $30!
+          We can start a big email thread with peoples' wish lists separately.
+          This is secret, don't spill who was assigned to you! 🙊
+          If shipping, double check shipping information before you send your gift.
+      
+          Merry Christmas!
+          
+      
+      Some Amazon companies won't ship to a PO box, so the gifter may need to use the Amazon store that's downtown for pickups.
+    ''',
+  })
+# ---
