@@ -24,4 +24,5 @@ class Household:
     def __repr__(self):
         return self.address_1 + " " + self.address_2
 
+
 # TODO create households and put them here

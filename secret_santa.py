@@ -12,8 +12,10 @@ from prettytable import PrettyTable
 from santa_common import email, matchmaker
 from santa_common.people import EVERYONE
 
-logging.basicConfig(level=logging.DEBUG,
-                    format="%(asctime)s %(levelname)-8s [%(module)-12s] - %(message)s")
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s %(levelname)-8s [%(module)-12s] - %(message)s",
+)
 
 
 def _pprint_pairs(pairs):
@@ -34,7 +36,9 @@ def _pprint_pairs(pairs):
 
 
 def send_email_from_pairs(pairs, sender_email):
-    password = getpass.getpass(f"Type email password for '{sender_email}' and press enter:")
+    password = getpass.getpass(
+        f"Type email password for '{sender_email}' and press enter:"
+    )
 
     # Create secure connection with server and send email
     context = ssl.create_default_context()
@@ -44,7 +48,9 @@ def send_email_from_pairs(pairs, sender_email):
 
         for my_pair in sorted(pairs, key=lambda x: x[0].household.address_1):
             giver, receiver = my_pair
-            logging.info(f"{giver.first} {giver.last} -> {receiver}. Emailing <{giver.email}>")
+            logging.info(
+                f"{giver.first} {giver.last} -> {receiver}. Emailing <{giver.email}>"
+            )
             message = email.make_mime_message(sender_email, giver, receiver)
             server.sendmail(sender_email, giver.email, message.as_string())
 
@@ -52,7 +58,9 @@ def send_email_from_pairs(pairs, sender_email):
 def main(send_emails, sender_email):
     # TODO smarter way of getting people data than hardcoded objects
     if not EVERYONE:
-        logging.error("EVERYONE tuple from 'common.people' module is empty. Populate it.")
+        logging.error(
+            "EVERYONE tuple from 'common.people' module is empty. Populate it."
+        )
         return 1
 
     pairs = matchmaker.make_pairs(EVERYONE)
@@ -70,12 +78,20 @@ def main(send_emails, sender_email):
 if __name__ == "__main__":
     my_parser = argparse.ArgumentParser(
         description="Assigns people random 'Secret Santa' giftees. By default the program doesn't actually send the "
-                    "emails to prevent accidents. There's an arg for that!",
-        epilog='Merry Christmas!')
-    my_parser.add_argument("-e", "--sender-email", required=True,
-                           help="What email to use as the sender for the emails.")
-    my_parser.add_argument("--send-emails", action="store_true",
-                           help="Actually sends the emails instead of outputting the dry-run of what would happen.")
+        "emails to prevent accidents. There's an arg for that!",
+        epilog="Merry Christmas!",
+    )
+    my_parser.add_argument(
+        "-e",
+        "--sender-email",
+        required=True,
+        help="What email to use as the sender for the emails.",
+    )
+    my_parser.add_argument(
+        "--send-emails",
+        action="store_true",
+        help="Actually sends the emails instead of outputting the dry-run of what would happen.",
+    )
 
     args = my_parser.parse_args()
 

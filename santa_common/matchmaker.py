@@ -21,8 +21,10 @@ def make_pairs(all_people: Tuple[Person]) -> List[Tuple[Person, Person]]:
         try:
             pairs = _try_pair(all_people)
         except IndexError as ie:
-            logging.info("IndexError because we cannot always slice people into pairs evenly. Trying again... (%d)",
-                         tries)
+            logging.info(
+                "IndexError because we cannot always slice people into pairs evenly. Trying again... (%d)",
+                tries,
+            )
         else:
             break
 
@@ -38,7 +40,9 @@ def _try_pair(all_people):
     # Assign each giver one receiver that is not from their household
     for giver in all_people:
         # Sometimes this throws an IndexError because unluckily there is NO receiver not in the giver's household
-        receiver = random.choice([r for r in receivers if r.household != giver.household])
+        receiver = random.choice(
+            [r for r in receivers if r.household != giver.household]
+        )
 
         receivers.remove(receiver)
         pairs.append((giver, receiver))

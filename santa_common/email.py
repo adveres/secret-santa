@@ -10,15 +10,21 @@ from .people import Person
 YEAR = datetime.datetime.now().year
 
 
-def make_mime_message(sender_email: str, giver: Person, receiver: Person) -> MIMEMultipart:
+def make_mime_message(
+    sender_email: str, giver: Person, receiver: Person
+) -> MIMEMultipart:
     message = MIMEMultipart("alternative")
-    message["Subject"] = f"🎅 Pst {giver.first}, your {YEAR} Secret Santa pick is here! 🎅"
+    message[
+        "Subject"
+    ] = f"🎅 Pst {giver.first}, your {YEAR} Secret Santa pick is here! 🎅"
     message["From"] = sender_email
     message["To"] = giver.email
 
     # Optional CC of giver (if a kid needs to also give a gift but doesn't shop)
     if giver.cc is not None:
-        message["CC"] = ",".join(giver.cc)  # Seems to work for multiple emails or single ones.
+        message["CC"] = ",".join(
+            giver.cc
+        )  # Seems to work for multiple emails or single ones.
 
     # Create the plain-text and HTML version of your message
     text = f"""
@@ -64,7 +70,11 @@ def make_mime_message(sender_email: str, giver: Person, receiver: Person) -> MIM
         <li>If shipping, double check shipping information before you send your gift.</li>
     """
     if receiver.household.notes is not None:
-        html += "<li><b><u>Special notes for this address:</u></b> " + receiver.household.notes + "</li>"
+        html += (
+            "<li><b><u>Special notes for this address:</u></b> "
+            + receiver.household.notes
+            + "</li>"
+        )
     html += "</ul><br>🎄 Merry Christmas! 🎄</p></body></html>"
 
     # Turn these into plain/html MIMEText objects

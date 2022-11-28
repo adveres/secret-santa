@@ -6,8 +6,14 @@ from .houses import Household
 
 
 class Person:
-    def __init__(self, first: str, last: str, email: str, household: Household,
-                 cc: List[str] = None):
+    def __init__(
+        self,
+        first: str,
+        last: str,
+        email: str,
+        household: Household,
+        cc: List[str] = None,
+    ):
         self.first = first
         self.last = last
         self.email = email
